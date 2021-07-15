@@ -21,4 +21,9 @@ public class NumberGuessPlayer implements PlayerInterface {
     public <SomeReturnType> void play() {
         gameCurrentlyPlaying.run();
     }
+
+    @Override
+    public void setArcadeAccount(CasinoAccount casinoAccount) {
+
+    }
 }

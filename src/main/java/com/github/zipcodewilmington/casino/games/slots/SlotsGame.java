@@ -23,15 +23,16 @@ public class SlotsGame implements GameInterface {
     Random generator = new Random();
     String slot1, slot2, slot3;
     int input = 0;
+    PlayerInterface slotsPlayer;
 
     @Override
     public void add(PlayerInterface player) {
-
+        this.slotsPlayer = player;
     }
 
     @Override
     public void remove(PlayerInterface player) {
-
+        this.slotsPlayer = null;
     }
 
     @Override
@@ -40,7 +41,7 @@ public class SlotsGame implements GameInterface {
         while(input == 1){
             console.println("Welcome to the Slot Machine!");
             console.println("You need 10 tokens to play!" + "\n");
-            input = console.getIntegerInput("Press 1 to pull or press 2 to quit"); //this will be where the funds are added
+            input = console.getIntegerInput("Press 1 to pull or press 2 to quit");
             casinoAccount.reduceBalance(10);
             String[] slotValues = {"watermelon", "grape", "lemon", "orange", "bar", "7", "BIGWIN", "cherry","banana"};
             slot1 = slotValues[generator.nextInt(slotValues.length)];
