@@ -1,6 +1,12 @@
 package com.github.zipcodewilmington.casino.games.CrapsGame;
 
-public class CrapsGame {
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.utils.IOConsole;
+
+import java.io.Console;
+
+public class CrapsGame implements GameInterface {
     Dice dice = new Dice();
     int num1;
     int num2;
@@ -29,6 +35,31 @@ public class CrapsGame {
             if(num2!=11&&num2!=7)
                 return true;
         } System.out.println("Turn in your chips... Better luck next time!");return false;
+    }
+
+    @Override
+    public void add(PlayerInterface player) {
+
+
+    }
+
+    @Override
+    public void remove(PlayerInterface player) {
+
+    }
+
+    @Override
+    public void run() {
+        IOConsole console = new IOConsole();
+        int input = 0;
+
+        while(input==1){
+            console.println("Welcome to the Craps Table!");
+
+            input = console.getIntegerInput("Press 1 to roll or press 2 to quit");
+
+        }
+
     }
 }
 
