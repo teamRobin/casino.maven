@@ -18,17 +18,16 @@ IOConsole console = new IOConsole(AnsiColor.PURPLE);
         console.println("Your first roll is " + num1 + "!");
 
         num2 = dice.rollingTheDice();
-        boolean x;
         console.println("Your second roll is " + num2 + "!");
 
         if (num1==7||num1==11){
             if(num2==7||num2==11)
-                x=true;
-        if(num1!=11&&num1!=7){
+                console.println("Cash Out! You've won!");
+        else if(num1!=11&&num1!=7){
             if(num2!=11&&num2!=7)
-                x=true;console.println("Cash Out! You've won!");}
-        }else {console.println("Turn in your chips... Better luck next time!"); x=false;}
-    }
+                console.println("Cash Out! You've won!");}
+        }else {console.println("Turn in your chips... Better luck next time!"); }
+        }
 
     @Override
     public void add(PlayerInterface player) {

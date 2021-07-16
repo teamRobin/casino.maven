@@ -15,6 +15,7 @@ public class RouletteGame implements GameInterface {
     int money;
     int bet;
     int input;
+    int block;
     private PlayerInterface player;
 
     public RouletteGame() {
@@ -23,66 +24,67 @@ public class RouletteGame implements GameInterface {
         black = new Integer[]{2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
         input=0;
     }
+    public void ballColor(int ball){
+        IOConsole console = new IOConsole(AnsiColor.PURPLE);
+        List<Integer> redNum = Arrays.asList(red);
+            if (redNum.contains(ball)) {
+                console.println("Number is "+ball+" RED!");
+            }else{console.println("Number is "+ball+" BLACK!");
+        }
+    }
     public int choosingABet() {
         IOConsole console = new IOConsole(AnsiColor.YELLOW);
         console.println("Welcome to The Roulette Table!");
+        this.input = console.getIntegerInput("Would you like to Play? 1.Yes 2.No");
+        while(this.input==1){
         console.println("Make your bets below <3");
         this.bet = console.getIntegerInput("Bet 1, 5, or 10");
-        this.input = console.getIntegerInput("Would you like to Play? 1.Yes 2.No");
-        while(input==1){
-        this.input = console.getIntegerInput("1.(Red) 2.(Black) 3.(Odds) 4.(Evens) 5.(Specific Number)");
-        if (input == 1) {
-            List<Integer> redNum = Arrays.asList(red);
-            if (input == 1) {
-                for (Integer num : redNum) {
-                    if (ball == num) {
+        this.block = console.getIntegerInput("1.(Red) 2.(Black) 3.(Odds) 4.(Evens) 5.(Specific Number)");
+        RouletteGame game = new RouletteGame();
+        List<Integer> redNum = Arrays.asList(red);
+            if (block == 1) {game.ballColor(ball);
+                    if (redNum.contains(ball)) {
                         money = bet * 2;
                         console.println("Yay, you won $$$"+ money+ "!!!!");
+
                     }else {money = bet - bet;
                     console.println("Sorry you lost $"+ bet + "!!!!");}
-
-                }break;
-            }
-
-        } else if (input == 2) {
+            } else if (block == 2) {
             List<Integer> blackNum = Arrays.asList(black);
-            if (input == 2) {
-                for (Integer num : blackNum) {
-                    if (ball == num) {
+            if (block == 2) {game.ballColor(ball);
+                    if (blackNum.contains(ball)) {
                         money = bet + bet;
                         console.println("Yay, you won $$$"+ money+ "!!!!");
-                    }else{
-                    money = bet - bet;
-                    console.println("Sorry you lost $"+ bet + "!!!!");}
+                    }else{money = bet - bet;
+                    console.println("Sorry you lost $"+ bet + "!!!!");}continue;
                 }
-            }
-        } else if (input == 3) {
+        } else if (block == 3) {
+            game.ballColor(ball);
             if (ball % 2 == 0) {
                 money = bet - bet;
-                console.println("Sorry you lost $"+ bet + "!!!!");
-            }else {money = bet + bet;
-            console.println("Yay, you won $$$"+ money+ "!!!!");}
-
-        } else if (input == 4) {
+                console.println("Sorry you lost $" + bet + "!!!!");
+            } else { money = bet + bet;
+                console.println("Yay, you won $$$" + money + "!!!!");
+            } continue;
+        } else if (block == 4) {game.ballColor(ball);
             if (ball % 2 == 0) {
                 money = bet + bet;
                 console.println("Yay, you won $$$"+ money+ "!!!!");
             }else{
             money = bet - bet;
-            console.println("Sorry you lost $"+ bet + "!!!!");}
-        } else if (input == 5) {
+            console.println("Sorry you lost $"+ bet + "!!!!");}continue;
+        } else if (block == 5) {
             int num = 0;
             num = console.getIntegerInput("Pick a number between 1-36 that you would like to bet on!");
+            game.ballColor(ball);
             if (ball == num) {
                 money = bet + bet * 2;
                 console.println("Yay, you won $$$"+ money+ "!!!!");
             }else{
             money = bet - bet;
             console.println("Sorry you lost $"+ bet + "!!!!");}
-        }
+                continue;}
     }return money;}
-
-
 
         @Override
         public void add (PlayerInterface player){
@@ -99,8 +101,5 @@ public class RouletteGame implements GameInterface {
         public void run () {
 RouletteGame game = new RouletteGame();
 int money=game.choosingABet();
-
-
+            }
         }
-    }
-

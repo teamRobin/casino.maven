@@ -8,14 +8,14 @@ CasinoAccount casinoAccount;
 CrapsGame craps;
     @Override
     public CasinoAccount getArcadeAccount() {
-        return casinoAccount;
+        return this.casinoAccount;
     }
 
     @Override
     public void play() {craps.run();}
 
     @Override
-    public void setArcadeAccount(CasinoAccount casinoAccount) {
+    public void setArcadeAccount(CasinoAccount casinoAccount) {this.casinoAccount=casinoAccount;
 
     }
 }

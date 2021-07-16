@@ -8,7 +8,8 @@ import com.github.zipcodewilmington.casino.games.keno.KenoPlayer;
 import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
 
 public class MainApplication {
-    public static void main(String[] args) { new Casino().run();}
+    public static void main(String[] args) { new CrapsGame().run();}
+            //Casino().run();}
 
     }
 
