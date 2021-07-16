@@ -5,7 +5,10 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 
 public class CrapsPlayer implements PlayerInterface {
 CasinoAccount casinoAccount;
-CrapsGame craps;
+
+
+
+    CrapsGame craps;
     @Override
     public CasinoAccount getArcadeAccount() {
         return this.casinoAccount;
