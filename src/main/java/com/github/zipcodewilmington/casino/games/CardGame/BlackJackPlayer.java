@@ -10,31 +10,14 @@ public class BlackJackPlayer implements PlayerInterface {
 private ArrayList<BlackJackPlayer> players= new ArrayList<BlackJackPlayer>();
     Integer balance;
     private BlackJack currentGame;
-    private CasinoAccount casinoRobinAccount;
+     CasinoAccount casinoRobinAccount;
      String ID;
      String pwd;
 
 public BlackJackPlayer(){
 }
 
-//public BlackJackPlayer(final List<String>players){
-//    players.addAll(players);
-//}
-//    public void add(BlackJackPlayer player)
-//    {
-//        players.add(player);
-//    }
-//public void add(PlayerInterface...players){
-//    for(PlayerInterface player: players){
-//        this.players.get(player.getArcadeAccount());
-//    }
-//}
 
-//    private BlackJack currentGame;
-//    private CasinoAccount casinoAccount;
-//    protected String ID;
-//    protected String pwd;
-//    protected
 
     public BlackJackPlayer(String ID, String password,Integer balance){
         this.ID = ID;
@@ -46,22 +29,23 @@ public BlackJackPlayer(){
         return ID;
     }
 
-    public void addAmount(Integer balance) {
-        this.balance += balance;
+    public void addAmount(Integer moneyToAdd) {
+        this.balance += moneyToAdd;
     }
 
         private BlackJackPlayer blackJackPlayer;
 
-        public BlackJackPlayer(BlackJackPlayer user) {
+        public BlackJackPlayer(CasinoAccount casinoRobinAccount, BlackJackPlayer user) {
+            this.casinoRobinAccount=casinoRobinAccount;
             this.blackJackPlayer = user;
         }
 
-        public Boolean placeWager(Integer wagerAmount) {
+        public Boolean reduceBalance(Integer wagerAmount) {
             if (blackJackPlayer.balance < wagerAmount) { return false; }
             else if ( wagerAmount < 0 ) { return false;}
             else {
                 blackJackPlayer.balance -= wagerAmount;
-                //this.pot += wagerAmount;
+
                 return true;
             }
         }
@@ -70,12 +54,11 @@ public BlackJackPlayer(){
 
     @Override
     public CasinoAccount getArcadeAccount() {
-        return this.casinoRobinAccount;
+        return casinoRobinAccount;
     }
     public void setArcadeAccount(CasinoAccount casinoRobinAccount) {
         this.casinoRobinAccount = casinoRobinAccount;
     }
-
     @Override
     public <SomeReturnType> void play() {
 

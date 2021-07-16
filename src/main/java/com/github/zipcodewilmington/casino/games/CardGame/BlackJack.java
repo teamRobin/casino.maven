@@ -1,13 +1,11 @@
 package com.github.zipcodewilmington.casino.games.CardGame;
 
+import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
-import com.github.zipcodewilmington.casino.games.keno.KenoPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
-import com.github.zipcodewilmington.casino.games.CardGame.CardHand;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +15,10 @@ CardHand dealerHand;
 Deck deck =new Deck();
 Integer minimumWager=20;
 Set<BlackJackPlayer> players = new HashSet<>();
-BlackJackPlayer blackJackPlayer;
+BlackJackPlayer blackJackPlayer = new BlackJackPlayer("player1","pwd",100);
+//CasinoAccount casinoRobinAccount = new CasinoAccount();
+PlayerInterface playerBlackJack;
+
 
 public BlackJack(){
     super();
@@ -26,26 +27,24 @@ public BlackJack(int numberOfDecks){
     super(numberOfDecks);
 }
 
-    public BlackJackPlayer getPlayer(String playerUsername) {
-        for (BlackJackPlayer player : players) {
-            if (player.getArcadeAccount().getUsername().equals(playerUsername)) {
-                return player;
-            }
-        }
-        return null;
-    }
+//    public BlackJackPlayer getPlayer(String playerUsername) {
+//        for (BlackJackPlayer player : players) {
+//            if (player.getArcadeAccount().getUsername().equals(playerUsername)) {
+//                return player;
+//            }
+//        }
+//        return null;
+//    }
 
 public void playBlackjack(){
     IOConsole input = new IOConsole(AnsiColor.PURPLE);
     Deck blackjackDeck= new Deck(1);
     Integer playerMoney = 100;
     blackjackDeck.shuffle();
-    String blackJackPlayerID = input.getStringInput("Enter your User ID");
-    String blackJackPlayerPwd = input.getStringInput("Enter your password");
-    input.println("Validating....");
-    BlackJackPlayer blackJackPlayer = new BlackJackPlayer(blackJackPlayerID,blackJackPlayerPwd,playerMoney);
-    //blackJackPlayer.
-    input.println("Lets play Blackjack!!! You have "+playerMoney+"$");
+
+
+    input.println("Lets play   ♣♦♥♠ BLACKJACK ♣♦♥♠    !!! You have "+playerMoney+"$");
+
     {
         while(playerMoney > 0) {
             Integer playerWager = input.getIntegerInput("How much would you like to play for?");
@@ -74,12 +73,20 @@ public void playBlackjack(){
                     input.println("Dealer total hand value is :" + dealerHandValue);
                     if(dealerHandValue==21){
                         playerMoney -= playerWager;
+                        //blackJackPlayer.reduceBalance(playerWager);
+
+                        //playerBlackJack.getArcadeAccount().addToBalance(playerWager);
+
                         input.println("Dealer got BlackJack!Better luck next time!");
                         endGame=true;
                         break;
                     }
                     else if(playerHandValue==21){
                         playerMoney += playerWager;
+
+                       // blackJackPlayer.addAmount(playerWager);
+                       // playerBlackJack.getArcadeAccount().reduceBalance(playerWager);
+
                         input.println("You got BlackJack!Poor Dealer");
                         endGame=true;
                         break;
@@ -95,6 +102,10 @@ public void playBlackjack(){
                         {
                             input.println("Busted!! You lose!!");
                             playerMoney -= playerWager;
+
+                            //blackJackPlayer.reduceBalance(playerWager);
+                           // playerBlackJack.getArcadeAccount().addToBalance(playerWager);
+
                             endGame = true;
                             break;
                         }
@@ -110,6 +121,10 @@ public void playBlackjack(){
                 {
                     input.println("Dealer won.. You Lost!!");
                     playerMoney -= playerWager;
+
+                    //blackJackPlayer.reduceBalance(playerWager);
+                    //playerBlackJack.getArcadeAccount().addToBalance(playerWager);
+
                     endGame = true;
                 }
                 while(dealerHandValue <= 16 && endGame == false)
@@ -124,6 +139,10 @@ public void playBlackjack(){
                 {
                     input.println("Dealer Busted!! You won!!");
                     playerMoney += playerWager;
+
+                    //blackJackPlayer.addAmount(playerWager);
+                    //playerBlackJack.getArcadeAccount().reduceBalance(playerWager);
+
                     endGame = true;
                 }
                 if(playerHandValue == dealerHandValue && endGame == false)
@@ -135,16 +154,27 @@ public void playBlackjack(){
                 {
                     input.println("You won this round");
                     playerMoney += playerWager;
+
+                    //blackJackPlayer.addAmount(playerWager);
+                    //playerBlackJack.getArcadeAccount().reduceBalance(playerWager);
+
                     endGame = true;
                 }
                 else if(endGame == false)
                 {
                     input.println("You lost this round");
                     playerMoney -= playerWager;
+
+                    //blackJackPlayer.reduceBalance(playerWager);
+                    //playerBlackJack.getArcadeAccount().addToBalance(playerWager);
+
                     endGame = true;
                 }
 
                 input.println("You have  "+playerMoney+"$ left!!");
+
+                //input.println("balance test :"+blackJackPlayer.getBalance());
+                //input.println("Casino balance"+playerBlackJack.getArcadeAccount().getBalance());
 
             }
         }
@@ -159,13 +189,6 @@ public Boolean checkBust(Integer totalValue)
         return false;
 
 }
-//public Boolean gotBlackJack(Integer totalValue)
-//{
-//    if(totalValue == 21)
-//        return true;
-//    else
-//        return false;
-//}
 
     public Integer checkHandValue(CardHand hand) {
         Integer totalValue = 0;
@@ -200,12 +223,12 @@ public Boolean checkBust(Integer totalValue)
 
     @Override
     public void add(PlayerInterface player) {
-        players.add((BlackJackPlayer) player);
+        this.playerBlackJack = player;
     }
 
     @Override
     public void remove(PlayerInterface player) {
-        players.remove(player);
+        this.playerBlackJack = null;
     }
 
 @Override
