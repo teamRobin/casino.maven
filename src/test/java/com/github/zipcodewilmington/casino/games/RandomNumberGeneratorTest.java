@@ -35,4 +35,23 @@ public class RandomNumberGeneratorTest {
         // Then
         Assert.assertTrue(randomNumber >= minNumber && randomNumber <= maxNumber);
     }
+
+    @Test
+    public void constructorTest() {
+        // Given
+        Integer expectedMinNumber = 1;
+        Integer expectedMaxNumber = 80;
+        Integer expectedAmountOfNumbers = 20;
+
+        // When
+        KenoGame kenoGame = new KenoGame();
+        Integer actualMinNumber = kenoGame.getMinNumber();
+        Integer actualMaxNumber = kenoGame.getMaxNumber();
+        Integer actualAmountOfNumbers = kenoGame.getAmountOfNumbers();
+
+        // Then
+        Assert.assertEquals(expectedMinNumber, actualMinNumber);
+        Assert.assertEquals(expectedMaxNumber, actualMaxNumber);
+        Assert.assertEquals(expectedAmountOfNumbers, actualAmountOfNumbers);
+    }
 }

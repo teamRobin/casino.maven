@@ -5,15 +5,21 @@ import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.games.CardGame.BlackJack;
+import com.github.zipcodewilmington.casino.games.CardGame.BlackJackPlayer;
 import com.github.zipcodewilmington.casino.games.CardGame.CasinoWar;
+import com.github.zipcodewilmington.casino.games.CardGame.CasinoWarPlayer;
 import com.github.zipcodewilmington.casino.games.CrapsGame.CrapsGame;
+import com.github.zipcodewilmington.casino.games.CrapsGame.CrapsPlayer;
 import com.github.zipcodewilmington.casino.games.keno.KenoGame;
 import com.github.zipcodewilmington.casino.games.keno.KenoPlayer;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 //import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
+import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
 import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
+import com.github.zipcodewilmington.casino.games.roulette.RouletteGamePlayer;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 //import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
+import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -46,33 +52,26 @@ public class Casino implements Runnable {
 
                     switch (gameSelectionInput) {
                         case "KENO":
-                            if (casinoAccount.getAge() < 18) {
-                                consoleRed.println("You are not old enough to play this game!");
-                            }
-                            else {
+                            while (isOldEnough(casinoAccount)) {
                                 KenoGame kenoGame = new KenoGame();
                                 play(kenoGame, new KenoPlayer(casinoAccount, kenoGame));
+                                break;
                             }
                             break;
 
                         case "SLOTS":
-                            if (casinoAccount.getAge() < 18) {
-                                consoleRed.println("You are not old enough to play this game!");
-
-                            }
-                            else {
+                            while (isOldEnough(casinoAccount)) {
                                 SlotsGame slotsGame = new SlotsGame();
                                 play(slotsGame, new SlotsPlayer(casinoAccount));
+                                break;
                             }
                             break;
 
                         case "BLACKJACK":
-                            if (casinoAccount.getAge() < 18) {
-                                consoleRed.println("You are not old enough to play this game!");
-                            }
-                            else {
+                            while (isOldEnough(casinoAccount)) {
                                 BlackJack blackJack = new BlackJack();
-                                //play(blackJack, new BlackJackPlayer());
+                                play(blackJack, new BlackJackPlayer());
+                                break;
                             }
                             break;
 
@@ -83,26 +82,22 @@ public class Casino implements Runnable {
 
                         case "WAR":
                             CasinoWar war = new CasinoWar();
-                            play(war, new CasinoWar());
+                            play(war, new CasinoWarPlayer(casinoAccount));
                             break;
 
                         case "ROULETTE":
-                            if (casinoAccount.getAge() < 18) {
-                                consoleRed.println("You are not old enough to play this game!");
-                            }
-                            else {
+                            while (isOldEnough(casinoAccount)) {
                                 RouletteGame rouletteGame = new RouletteGame();
-                                //play(rouletteGame, new RoulettePlayer());
+                                play(rouletteGame, new RouletteGamePlayer());
+                                break;
                             }
                             break;
 
                         case "CRAPS":
-                            if (casinoAccount.getAge() < 18) {
-                                consoleRed.println("You are not old enough to play this game!");
-                            }
-                            else {
+                            while (isOldEnough(casinoAccount)) {
                                 CrapsGame crapsGame = new CrapsGame();
-                                //play(crapsGame, new CrapsPlayer());
+                                play(crapsGame, new CrapsPlayer());
+                                break;
                             }
                             break;
 
@@ -158,6 +153,14 @@ public class Casino implements Runnable {
         PlayerInterface player = (PlayerInterface)playerObject;
         game.add(player);
         game.run();
+    }
+
+    private Boolean isOldEnough(CasinoAccount casinoAccount) {
+        if (casinoAccount.getAge() < 18) {
+            consoleRed.println("You are not old enough to play this game!");
+            return false;
+        }
+        return true;
     }
 
     private void printSign() {

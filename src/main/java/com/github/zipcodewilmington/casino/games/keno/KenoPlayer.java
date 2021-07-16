@@ -110,15 +110,18 @@ public class KenoPlayer implements PlayerInterface {
     }
 
     public Integer getBet() {
-        Integer bet = console.getIntegerInput("How much do you want to bet?");
-        if (bet < 1) {
-            consoleRed.println("You cannot bet less than $1");
-            getBet();
+        Integer bet;
+        while (true) {
+            bet = console.getIntegerInput("How much do you want to bet?");
+            if (bet < 1) {
+                consoleRed.println("You cannot bet less than $1, try a different amount");
+            }
+            else if (bet > casinoAccount.getBalance()) {
+                consoleRed.println("Your balance is not sufficient, try a different amount");
+            }
+            else {
+                return bet;
+            }
         }
-        else if (bet > casinoAccount.getBalance()) {
-            consoleRed.println("Your balance is not sufficient, try a different amount");
-            getBet();
-        }
-        return bet;
     }
 }
