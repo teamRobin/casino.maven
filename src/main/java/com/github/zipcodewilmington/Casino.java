@@ -70,19 +70,21 @@ public class Casino implements Runnable {
                         case "BLACKJACK":
                             while (isOldEnough(casinoAccount)) {
                                 BlackJack blackJack = new BlackJack();
-                                play(blackJack, new BlackJackPlayer());
+                                play(blackJack, new BlackJackPlayer(casinoAccount));
                                 break;
                             }
                             break;
 
                         case "NUMBERGUESS":
-                            NumberGuessGame numberGuessGame = new NumberGuessGame();
-                            play(numberGuessGame, new NumberGuessPlayer(casinoAccount));
+                            while (isOldEnough(casinoAccount)) {
+                                NumberGuessGame numberGuessGame = new NumberGuessGame();
+                                play(numberGuessGame, new NumberGuessPlayer(casinoAccount));
+                                break;
+                            }
                             break;
 
                         case "WAR":
-                            CasinoWar war = new CasinoWar();
-                            play(war, new CasinoWarPlayer(casinoAccount));
+                            new CasinoWar().playCasinoWarHands();
                             break;
 
                         case "ROULETTE":
