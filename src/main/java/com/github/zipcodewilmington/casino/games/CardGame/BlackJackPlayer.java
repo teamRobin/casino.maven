@@ -34,7 +34,9 @@ public BlackJackPlayer(){
     }
 
         private BlackJackPlayer blackJackPlayer;
-
+        public BlackJackPlayer(CasinoAccount casinoRobinAccount){
+            this.casinoRobinAccount=casinoRobinAccount;
+        }
         public BlackJackPlayer(CasinoAccount casinoRobinAccount, BlackJackPlayer user) {
             this.casinoRobinAccount=casinoRobinAccount;
             this.blackJackPlayer = user;

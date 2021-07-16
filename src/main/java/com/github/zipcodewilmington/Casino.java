@@ -103,6 +103,7 @@ public class Casino implements Runnable {
 
                         default:
                             consoleRed.println("[ %s ] is an invalid game selection", gameSelectionInput);
+
                     }
                 } else {
                     consoleRed.println("No account found with name of [ %s ] and password of [ %s ]", accountName, accountPassword);
