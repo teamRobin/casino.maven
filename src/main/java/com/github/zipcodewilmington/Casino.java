@@ -44,72 +44,74 @@ public class Casino implements Runnable {
                 CasinoAccount casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
                 boolean isValidLogin = casinoAccount != null;
                 if (isValidLogin) {
-                String gameSelectionInput = getGameSelectionInput().toUpperCase();
 
-                switch (gameSelectionInput) {
-                    case "KENO":
-                        if (casinoAccount.getAge() < 18) {
-                            consoleRed.println("You are not old enough to play this game!");
-                        }
-                        else {
-                            KenoGame kenoGame = new KenoGame();
-                            play(kenoGame, new KenoPlayer(casinoAccount, kenoGame));
-                        }
-                        break;
+                    String gameSelectionInput = getGameSelectionInput().toUpperCase();
 
-                    case "SLOTS":
-                        if (casinoAccount.getAge() < 18) {
-                            consoleRed.println("You are not old enough to play this game!");
+                    switch (gameSelectionInput) {
+                        case "KENO":
+                            if (casinoAccount.getAge() < 18) {
+                                consoleRed.println("You are not old enough to play this game!");
+                            }
+                            else {
+                                KenoGame kenoGame = new KenoGame();
+                                play(kenoGame, new KenoPlayer(casinoAccount, kenoGame));
+                            }
+                            break;
 
-                        }
-                        else {
-                            SlotsGame slotsGame = new SlotsGame();
-                            play(slotsGame, new SlotsPlayer(casinoAccount));
-                        }
-                        break;
+                        case "SLOTS":
+                            if (casinoAccount.getAge() < 18) {
+                                consoleRed.println("You are not old enough to play this game!");
 
-                    case "BLACKJACK":
-                        if (casinoAccount.getAge() < 18) {
-                            consoleRed.println("You are not old enough to play this game!");
-                        }
-                        else {
-                            BlackJack blackJack = new BlackJack();
-                            play(blackJack, new BlackJackPlayer(casinoAccount));
-                        }
-                        break;
+                            }
+                            else {
+                                SlotsGame slotsGame = new SlotsGame();
+                                play(slotsGame, new SlotsPlayer(casinoAccount));
+                            }
+                            break;
 
-                    case "NUMBERGUESS":
-                        NumberGuessGame numberGuessGame = new NumberGuessGame();
-                        play(numberGuessGame, new NumberGuessPlayer(casinoAccount));
-                        break;
+                        case "BLACKJACK":
+                            if (casinoAccount.getAge() < 18) {
+                                consoleRed.println("You are not old enough to play this game!");
+                            }
+                            else {
+                                BlackJack blackJack = new BlackJack();
+                                //play(blackJack, new BlackJackPlayer());
+                            }
+                            break;
 
-                    case "WAR":
-                        CasinoWar war = new CasinoWar();
-                        play(war, new CasinoWar());
-                        break;
+                        case "NUMBERGUESS":
+                            NumberGuessGame numberGuessGame = new NumberGuessGame();
+                            play(numberGuessGame, new NumberGuessPlayer(casinoAccount));
+                            break;
 
-                    case "ROULETTE":
-                        if (casinoAccount.getAge() < 18) {
-                            consoleRed.println("You are not old enough to play this game!");
-                        }
-                        else {
-                            RouletteGame rouletteGame = new RouletteGame();
-                            //play(rouletteGame, new RoulettePlayer());
-                        }
-                        break;
+                        case "WAR":
+                            CasinoWar war = new CasinoWar();
+                            play(war, new CasinoWar());
+                            break;
 
-                    case "CRAPS":
-                        if (casinoAccount.getAge() < 18) {
-                            consoleRed.println("You are not old enough to play this game!");
-                        }
-                        else {
-                            CrapsGame crapsGame = new CrapsGame();
-                            //play(crapsGame, new CrapsPlayer());
-                        }
-                        break;
+                        case "ROULETTE":
+                            if (casinoAccount.getAge() < 18) {
+                                consoleRed.println("You are not old enough to play this game!");
+                            }
+                            else {
+                                RouletteGame rouletteGame = new RouletteGame();
+                                //play(rouletteGame, new RoulettePlayer());
+                            }
+                            break;
 
-                    default:
-                        consoleRed.println("[ %s ] is an invalid game selection", gameSelectionInput);
+                        case "CRAPS":
+                            if (casinoAccount.getAge() < 18) {
+                                consoleRed.println("You are not old enough to play this game!");
+                            }
+                            else {
+                                CrapsGame crapsGame = new CrapsGame();
+                                //play(crapsGame, new CrapsPlayer());
+                            }
+                            break;
+
+                        default:
+                            consoleRed.println("[ %s ] is an invalid game selection", gameSelectionInput);
+
                     }
                 } else {
                     // TODO - implement better exception handling

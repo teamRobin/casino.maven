@@ -18,7 +18,7 @@ RouletteGame game;
     }
 
     @Override
-    public void setArcadeAccount(CasinoAccount casinoAccount) {
+    public void setArcadeAccount(CasinoAccount casinoAccount) {this.casinoAccount=casinoAccount;
 
     }
 }
