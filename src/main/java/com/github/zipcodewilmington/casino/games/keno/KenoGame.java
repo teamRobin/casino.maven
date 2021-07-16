@@ -13,9 +13,11 @@ import java.util.Set;
 public class KenoGame extends RandomNumberGenerator implements GameInterface {
 
     IOConsole console = new IOConsole(AnsiColor.CYAN);
-    Set<KenoPlayer> players = new HashSet<>();
+    IOConsole consoleGreen = new IOConsole(AnsiColor.GREEN);
+    IOConsole consoleRed = new IOConsole(AnsiColor.RED);
     Set<Integer> randomNumbers = generateRandomNumbers();
     Integer playerNumber = 1;
+    KenoPlayer player;
 
     public KenoGame() {
         super(1,80, 20);
@@ -23,40 +25,36 @@ public class KenoGame extends RandomNumberGenerator implements GameInterface {
 
     @Override
     public void add(PlayerInterface player) {
-        players.add((KenoPlayer) player);
+        this.player = (KenoPlayer)player;
     }
 
     @Override
     public void remove(PlayerInterface player) {
-        players.remove(player);
+        this.player = null;
     }
 
     @Override
     public void run() {
-        Integer count = 1;
-        for (KenoPlayer kenoPlayer : players) {
-            kenoPlayer.play();
+        if (player.casinoAccount.getBalance() == 0) {
+            consoleRed.println("You do not have enough money to play");
         }
-        for (KenoPlayer kenoPlayer : players) {
-            console.println("Player #%s:  %s", count, kenoPlayer.chosenNumbers);
-            kenoPlayer.outcomeOfGame(kenoPlayer.amountToBet);
-            kenoPlayer.casinoAccount.addToBalance(kenoPlayer.prizeMoney);
-            count++;
+        else {
+            player.play();
+            console.println("Your chosen numbers:  %s", player.chosenNumbers);
+            player.outcomeOfGame(player.amountToBet);
+            player.casinoAccount.addToBalance(player.prizeMoney);
+            consoleGreen.println("Your new balance is $%s", player.casinoAccount.getBalance());
+            console.println("Keno Board: %s", randomNumbers);
         }
-        console.println("Keno Board: %s", randomNumbers);
     }
 
     public KenoPlayer getPlayer(String playerUsername) {
-        for (KenoPlayer player : players) {
-            if (player.getArcadeAccount().getUsername().equals(playerUsername)) {
-                return player;
-            }
+        if (player.getArcadeAccount().getUsername().equals(playerUsername)) {
+            return player;
         }
-        return null;
-    }
-
-    public Set<KenoPlayer> getPlayers() {
-        return players;
+        else {
+            return null;
+        }
     }
 
     public Set<Integer> getChosenNumbers() {
@@ -78,9 +76,5 @@ public class KenoGame extends RandomNumberGenerator implements GameInterface {
         }
         playerNumber++;
         return chosenNumbers;
-    }
-
-    public Integer getBet() {
-        return console.getIntegerInput("How much do you want to bet?");
     }
 }

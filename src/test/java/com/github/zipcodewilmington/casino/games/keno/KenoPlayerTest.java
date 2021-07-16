@@ -54,6 +54,6 @@ public class KenoPlayerTest {
         Integer prizeMoney = kenoPlayer.outcomeOfGame(1);
 
         // Then
-        Assert.assertTrue(prizeMoney >= 2 && prizeMoney <= 10000);
+        Assert.assertTrue(prizeMoney >= 0 && prizeMoney <= 10000);
     }
 }

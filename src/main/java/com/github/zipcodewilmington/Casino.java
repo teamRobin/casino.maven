@@ -41,6 +41,7 @@ public class Casino implements Runnable {
                 CasinoAccount casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
                 boolean isValidLogin = casinoAccount != null;
                 if (isValidLogin) {
+
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
 
                     switch (gameSelectionInput) {
@@ -109,7 +110,6 @@ public class Casino implements Runnable {
                             consoleRed.println("[ %s ] is an invalid game selection", gameSelectionInput);
                     }
                 } else {
-                    // TODO - implement better exception handling
                     consoleRed.println("No account found with name of [ %s ] and password of [ %s ]", accountName, accountPassword);
                 }
             } else if (1 == arcadeDashBoardInput) {
@@ -121,6 +121,18 @@ public class Casino implements Runnable {
                 CasinoAccount newAccount = casinoAccountManager.createAccount(accountName, accountPassword, accountAge, accountBalance);
                 casinoAccountManager.registerAccount(newAccount);
             }
+            else if (4 == arcadeDashBoardInput) {
+                String accountName = consoleBlue.getStringInput("Enter your account name:");
+                String accountPassword = consoleBlue.getStringInput("Enter your account password:");
+                CasinoAccount casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
+                Integer amountToAdd = consoleBlue.getIntegerInput("Enter the amount to add to your balance");
+                if (amountToAdd > 0) {
+                    casinoAccount.addToBalance(amountToAdd);
+                }
+                else {
+                    consoleRed.println("You entered an invalid amount");
+                }
+            }
         } while (3 != arcadeDashBoardInput);
     }
 
@@ -128,7 +140,7 @@ public class Casino implements Runnable {
         return consoleBlue.getIntegerInput(new StringBuilder()
                 .append("Welcome to the Arcade Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t1. create account  2. select game  3. logout")
+                .append("\n\t1. create account  2. select game  3. logout  4. increase balance")
                 .toString());
     }
 
@@ -164,7 +176,12 @@ public class Casino implements Runnable {
         builder.append("♠       ♠               ♠                               ♠    ♠                               ♠       ♠    ♠                          ♠\n");
         builder.append("♠ ♠ ♠ ♠ ♠    ♠ ♠ ♠ ♠    ♠ ♠ ♠ ♠    ♠    ♠ ♠ ♠ ♠           ♠♠    ♠ ♠ ♠ ♠    ♠     ♠           ♠ ♠ ♠ ♠      ♠    ♠    ♠ ♠ ♠ ♠    ♠ ♠ ♠ ♠\n");
         builder.append("♠     ♠      ♠     ♠    ♠     ♠    ♠    ♠     ♠           ♠♠    ♠     ♠    ♠     ♠           ♠       ♠    ♠    ♠    ♠     ♠    ♠     ♠\n");
-        builder.append("♠       ♠    ♠ ♠ ♠ ♠    ♠ ♠ ♠ ♠    ♠    ♠     ♠           ♠♠    ♠ ♠ ♠ ♠    ♠ ♠ ♠ ♠           ♠ ♠ ♠ ♠ ♠    ♠    ♠    ♠     ♠    ♠ ♠ ♠ ♠\n");
+        builder.append("♠       ♠    ♠ ♠ ♠ ♠    ♠ ♠ ♠ ♠    ♠    ♠     ♠           ♠♠    ♠ ♠ ♠ ♠    ♠ ♠ ♠ ♠           ♠ ♠ ♠ ♠ ♠    ♠    ♠    ♠     ♠    ♠ ♠ ♠ ♠\n\n");
+        builder.append("                                  ♠ ♠ ♠ ♠        ♠        ♠ ♠ ♠ ♠    ♠ ♠ ♠ ♠    ♠       ♠    ♠ ♠ ♠ ♠                          \n");
+        builder.append("                                  ♠             ♠ ♠       ♠             ♠       ♠ ♠     ♠    ♠     ♠                          \n");
+        builder.append("                                  ♠            ♠ ♠ ♠      ♠ ♠ ♠ ♠       ♠       ♠   ♠   ♠    ♠     ♠                          \n");
+        builder.append("                                  ♠           ♠     ♠           ♠       ♠       ♠     ♠ ♠    ♠     ♠                          \n");
+        builder.append("                                  ♠ ♠ ♠ ♠    ♠       ♠    ♠ ♠ ♠ ♠    ♠ ♠ ♠ ♠    ♠       ♠    ♠ ♠ ♠ ♠                          \n");
         consoleCyan.println(builder.toString());
     }
 }
