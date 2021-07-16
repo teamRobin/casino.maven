@@ -77,7 +77,7 @@ public class Casino implements Runnable {
 
                     case "NUMBERGUESS":
                         NumberGuessGame numberGuessGame = new NumberGuessGame();
-                        play(numberGuessGame, new NumberGuessPlayer());
+                        play(numberGuessGame, new NumberGuessPlayer(casinoAccount));
                         break;
 
                     case "WAR":
