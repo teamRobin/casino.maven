@@ -54,7 +54,7 @@ public BlackJackPlayer(){
 
     @Override
     public CasinoAccount getArcadeAccount() {
-        return this.casinoRobinAccount;
+        return casinoRobinAccount;
     }
     public void setArcadeAccount(CasinoAccount casinoRobinAccount) {
         this.casinoRobinAccount = casinoRobinAccount;
