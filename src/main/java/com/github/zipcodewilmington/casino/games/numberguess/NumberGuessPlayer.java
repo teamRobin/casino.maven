@@ -11,6 +11,9 @@ public class NumberGuessPlayer implements PlayerInterface {
     CasinoAccount casinoAccount;
     NumberGuessGame gameCurrentlyPlaying;
 
+    public NumberGuessPlayer(CasinoAccount casinoAccount) {
+        this.casinoAccount = casinoAccount;
+    }
 
     @Override
     public CasinoAccount getArcadeAccount() {
