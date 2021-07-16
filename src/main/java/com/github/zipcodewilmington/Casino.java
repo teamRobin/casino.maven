@@ -5,15 +5,18 @@ import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.casino.games.CardGame.BlackJack;
+import com.github.zipcodewilmington.casino.games.CardGame.BlackJackPlayer;
 import com.github.zipcodewilmington.casino.games.CardGame.CasinoWar;
 import com.github.zipcodewilmington.casino.games.CrapsGame.CrapsGame;
 import com.github.zipcodewilmington.casino.games.keno.KenoGame;
 import com.github.zipcodewilmington.casino.games.keno.KenoPlayer;
 import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessGame;
 //import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
+import com.github.zipcodewilmington.casino.games.numberguess.NumberGuessPlayer;
 import com.github.zipcodewilmington.casino.games.roulette.RouletteGame;
 import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
 //import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
+import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -71,7 +74,7 @@ public class Casino implements Runnable {
                         }
                         else {
                             BlackJack blackJack = new BlackJack();
-                            //play(blackJack, new BlackJackPlayer());
+                            play(blackJack, new BlackJackPlayer(casinoAccount));
                         }
                         break;
 
