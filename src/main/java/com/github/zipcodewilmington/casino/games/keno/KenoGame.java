@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class KenoGame extends RandomNumberGenerator implements GameInterface {
 
-    IOConsole console = new IOConsole(AnsiColor.CYAN);
+    IOConsole console = new IOConsole(AnsiColor.BLUE);
     IOConsole consoleGreen = new IOConsole(AnsiColor.GREEN);
     IOConsole consoleRed = new IOConsole(AnsiColor.RED);
     Set<Integer> randomNumbers = generateRandomNumbers();
@@ -39,6 +39,7 @@ public class KenoGame extends RandomNumberGenerator implements GameInterface {
             consoleRed.println("You do not have enough money to play");
         }
         else {
+            greeting();
             player.play();
             console.println("Your chosen numbers:  %s", player.chosenNumbers);
             player.outcomeOfGame(player.amountToBet);
@@ -48,21 +49,12 @@ public class KenoGame extends RandomNumberGenerator implements GameInterface {
         }
     }
 
-    public KenoPlayer getPlayer(String playerUsername) {
-        if (player.getArcadeAccount().getUsername().equals(playerUsername)) {
-            return player;
-        }
-        else {
-            return null;
-        }
-    }
-
     public Set<Integer> getChosenNumbers() {
         Integer count = 1;
         Set<Integer> chosenNumbers = new HashSet<>();
         console.println("Input 10 numbers between 1 and 80");
         while (chosenNumbers.size() < 10) {
-            Integer numberInput = console.getIntegerInput("Player #%s numbers: %s\nInput number #%s",playerNumber, chosenNumbers, count);
+            Integer numberInput = console.getIntegerInput("Your chosen numbers: %s\nInput number #%s", chosenNumbers, count);
             if (chosenNumbers.contains(numberInput)) {
                 console.println("Number has already been chosen");
             }
@@ -76,5 +68,17 @@ public class KenoGame extends RandomNumberGenerator implements GameInterface {
         }
         playerNumber++;
         return chosenNumbers;
+    }
+
+    public String greeting() {
+        String output = new StringBuilder()
+        .append("______________________________________________\n")
+        .append("<<<<<<         Y O U   A R E            >>>>>>\n")
+        .append("<<<<<<         P L A Y I N G            >>>>>>\n")
+        .append("<<<<<<            K I N O               >>>>>>\n")
+        .append("______________________________________________\n")
+        .toString();
+        consoleRed.println(output);
+        return output;
     }
 }

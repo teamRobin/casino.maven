@@ -30,4 +30,16 @@ public abstract class RandomNumberGenerator {
         }
         return setOfNumbers;
     }
+
+    public Integer getMaxNumber() {
+        return maxNumber;
+    }
+
+    public Integer getMinNumber() {
+        return minNumber;
+    }
+
+    public Integer getAmountOfNumbers() {
+        return amountOfNumbers;
+    }
 }

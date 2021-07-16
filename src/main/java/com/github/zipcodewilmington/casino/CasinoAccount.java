@@ -7,10 +7,10 @@ package com.github.zipcodewilmington.casino;
  */
 public class CasinoAccount {
 
-    String username;
-    String password;
-    Integer age;
-    Integer balance;
+    private String username;
+    private String password;
+    private Integer age;
+    private Integer balance;
 
     public CasinoAccount(String username, String password, Integer age, Integer balance) {
         this.username = username;
@@ -41,10 +41,6 @@ public class CasinoAccount {
 
     public Integer getAge() {
         return age;
-    }
-
-    public void ageIncreased() {
-        age++;
     }
 
     public Integer getBalance() {

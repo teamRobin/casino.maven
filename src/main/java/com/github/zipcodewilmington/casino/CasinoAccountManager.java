@@ -30,7 +30,7 @@ public class CasinoAccountManager {
                 return casinoAccount;
             }
         }
-        console.println("No account found with name of [ %s ] and password of [ %s ]", accountName, accountPassword);
+        //console.println("No account found with name of [ %s ] and password of [ %s ]", accountName, accountPassword);
         return casinoAccount;
     }
 
