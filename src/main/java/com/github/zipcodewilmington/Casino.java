@@ -61,7 +61,7 @@ public class Casino implements Runnable {
                         }
                         else {
                             SlotsGame slotsGame = new SlotsGame();
-                            play(slotsGame, new SlotsPlayer());
+                            play(slotsGame, new SlotsPlayer(casinoAccount));
                         }
                         break;
 
