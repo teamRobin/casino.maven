@@ -15,7 +15,6 @@ import java.util.Scanner;
  * Created by leon on 7/21/2020.
  */
 public class SlotsGame implements GameInterface {
-  //  public static void main(String[] args) { }
     CasinoAccount casinoAccount = new CasinoAccount();
     IOConsole console = new IOConsole(AnsiColor.BLUE);
     Random generator = new Random();
