@@ -27,6 +27,7 @@ public class RouletteGame implements GameInterface {
         IOConsole console = new IOConsole(AnsiColor.YELLOW);
         console.println("Welcome to The Roulette Table!");
         console.println("Make your bets below <3");
+        this.bet = console.getIntegerInput("Bet 1, 5, or 10");
         this.input = console.getIntegerInput("Would you like to Play? 1.Yes 2.No");
         while(input==1){
         this.input = console.getIntegerInput("1.(Red) 2.(Black) 3.(Odds) 4.(Evens) 5.(Specific Number)");
