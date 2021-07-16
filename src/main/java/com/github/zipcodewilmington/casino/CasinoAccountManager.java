@@ -29,10 +29,8 @@ public class CasinoAccountManager {
             if (casinoAccount.getUsername().equals(accountName) && casinoAccount.getPassword().equals(accountPassword)) {
                 return casinoAccount;
             }
-            else if (!casinoAccounts.contains(casinoAccount.getUsername()) && !casinoAccounts.contains(casinoAccount.getPassword())) {
-                console.println("No account found with name of [ %s ] and password of [ %s ]", accountName, accountPassword);
-            }
         }
+        console.println("No account found with name of [ %s ] and password of [ %s ]", accountName, accountPassword);
         return casinoAccount;
     }
 

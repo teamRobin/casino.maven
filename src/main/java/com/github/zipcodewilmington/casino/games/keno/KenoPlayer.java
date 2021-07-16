@@ -2,6 +2,7 @@ package com.github.zipcodewilmington.casino.games.keno;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.Set;
@@ -9,6 +10,8 @@ import java.util.Set;
 public class KenoPlayer implements PlayerInterface {
 
     IOConsole console = new IOConsole();
+    IOConsole consoleGreen = new IOConsole(AnsiColor.GREEN);
+    IOConsole consoleRed = new IOConsole(AnsiColor.RED);
     CasinoAccount casinoAccount;
     KenoGame gameCurrentlyPlaying;
     Integer amountToBet;
@@ -33,9 +36,10 @@ public class KenoPlayer implements PlayerInterface {
 
     @Override
     public void play() {
+        consoleGreen.println("Your current balance is $%s", casinoAccount.getBalance());
         chosenNumbers = gameCurrentlyPlaying.getChosenNumbers();
         checkHowManyMatch();
-        amountToBet = gameCurrentlyPlaying.getBet();
+        amountToBet = getBet();
         casinoAccount.reduceBalance(amountToBet);
     }
 
@@ -103,5 +107,18 @@ public class KenoPlayer implements PlayerInterface {
                 return prizeMoney;
         }
         return prizeMoney;
+    }
+
+    public Integer getBet() {
+        Integer bet = console.getIntegerInput("How much do you want to bet?");
+        if (bet < 1) {
+            consoleRed.println("You cannot bet less than $1");
+            getBet();
+        }
+        else if (bet > casinoAccount.getBalance()) {
+            consoleRed.println("Your balance is not sufficient, try a different amount");
+            getBet();
+        }
+        return bet;
     }
 }
