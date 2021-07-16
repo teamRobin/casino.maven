@@ -7,6 +7,10 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
  * Created by leon on 7/21/2020.
  */
 public class SlotsPlayer implements PlayerInterface {
+    public SlotsPlayer(CasinoAccount casinoAccount) {
+        this.casinoAccount = casinoAccount;
+    }
+
     CasinoAccount casinoAccount;
     SlotsGame gameCurrentlyPlaying;
 
