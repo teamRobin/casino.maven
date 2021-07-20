@@ -7,12 +7,5 @@ public class RouletteTest {
 
     @Test
     public void choosingABetTest(){
-        //given
-        RouletteGame game = new RouletteGame();
-        int input=2;
-        String expect = "";
-        //when
-
-        //then
     }
 }
