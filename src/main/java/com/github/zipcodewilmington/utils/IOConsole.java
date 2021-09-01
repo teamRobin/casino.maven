@@ -54,13 +54,14 @@ public class IOConsole {
     }
 
     public Long getLongInput(String prompt, Object... args) {
+
         String stringInput = getStringInput(prompt, args);
         try {
             Long longInput = Long.parseLong(stringInput);
             return longInput;
         } catch (NumberFormatException nfe) {
-            println("[ %s ] is an invalid user input!", stringInput);
-            println("Try inputting an integer value!");
+            println("\u001B[31m[ %s ] is an invalid user input!", stringInput);
+            println("\u001B[31mTry inputting an integer value!");
             return getLongInput(prompt, args);
         }
     }
